@@ -1,0 +1,116 @@
+.skill-card {
+  --accent: var(--primary);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.6rem;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+/* Accent glow on hover */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  filter: blur(55px);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--surface-strong);
+}
+
+.skill-card:hover::before,
+.skill-card:hover::after {
+  opacity: 0.5;
+}
+
+.skill-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.skill-card__title {
+  font-size: 1.08rem;
+}
+
+.skill-card__desc {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.skill-card__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.skill-chip__icon {
+  color: var(--text-muted);
+  transition: color 0.22s ease;
+}
+
+.skill-chip:hover .skill-chip__icon {
+  color: var(--accent);
+}

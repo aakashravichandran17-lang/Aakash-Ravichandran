@@ -1,0 +1,129 @@
+.services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.service::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0;
+  filter: blur(60px);
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.service:hover {
+  transform: translateY(-5px);
+  border-color: rgba(99, 102, 241, 0.45);
+  background: var(--surface-strong);
+}
+
+.service:hover::after {
+  opacity: 0.4;
+}
+
+.service__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: var(--primary-bright);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+.service:hover .service__icon {
+  color: #fff;
+  background: rgba(99, 102, 241, 0.28);
+}
+
+.service__title {
+  font-size: 1.08rem;
+  position: relative;
+  z-index: 1;
+}
+
+.service__desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- CTA banner --- */
+.services__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding: clamp(1.8rem, 4vw, 2.75rem);
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.07));
+}
+
+.services__cta::before {
+  content: '';
+  position: absolute;
+  inset: -50% 40% 0 -20%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 65%);
+  pointer-events: none;
+}
+
+.services__cta-title {
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  position: relative;
+}
+
+.services__cta-sub {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.services__cta .btn {
+  position: relative;
+  flex-shrink: 0;
+}
+
+@media (min-width: 600px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .services__cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .services__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,82 @@
+<header class="navbar" [class.navbar--scrolled]="scrolled()" [class.navbar--open]="menuOpen()">
+  <nav class="navbar__inner container" aria-label="Primary navigation">
+    <a
+      class="navbar__logo"
+      href="#home"
+      (click)="navigate($event, 'home')"
+      aria-label="{{ logo }} — back to top"
+    >
+      <span class="navbar__logo-mark" aria-hidden="true">AR</span>
+      <span class="navbar__logo-text">{{ logo }}</span>
+    </a>
+
+    <!-- Desktop navigation -->
+    <ul class="navbar__links" role="list">
+      @for (link of navLinks; track link.id) {
+        <li>
+          <a
+            [href]="'#' + link.target"
+            class="navbar__link"
+            [class.navbar__link--active]="activeSection() === link.target"
+            [attr.aria-current]="activeSection() === link.target ? 'true' : null"
+            (click)="navigate($event, link.target)"
+          >
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="navbar__actions">
+      <a class="btn btn--primary btn--sm navbar__cta" href="#contact" (click)="navigate($event, 'contact')">
+        <ng-icon name="sparkles" size="15" aria-hidden="true" />
+        Let's Talk
+      </a>
+
+      <button
+        type="button"
+        class="navbar__toggle"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+        aria-label="{{ menuOpen() ? 'Close menu' : 'Open menu' }}"
+        (click)="toggleMenu()"
+      >
+        <ng-icon [name]="menuOpen() ? 'close' : 'menu'" size="22" aria-hidden="true" />
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="navbar__mobile"
+    [class.navbar__mobile--open]="menuOpen()"
+    [attr.aria-hidden]="!menuOpen()"
+  >
+    <ul class="navbar__mobile-links" role="list">
+      @for (link of navLinks; track link.id) {
+        <li>
+          <a
+            [href]="'#' + link.target"
+            class="navbar__mobile-link"
+            [class.navbar__mobile-link--active]="activeSection() === link.target"
+            (click)="navigate($event, link.target)"
+            [tabindex]="menuOpen() ? 0 : -1"
+          >
+            <ng-icon name="arrowRight" size="16" aria-hidden="true" />
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+
+  @if (menuOpen()) {
+    <button
+      type="button"
+      class="navbar__backdrop"
+      aria-label="Close menu"
+      (click)="closeMenu()"
+    ></button>
+  }
+</header>

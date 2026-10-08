@@ -1,0 +1,47 @@
+<section id="experience" class="section experience" aria-labelledby="experience-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="Experience"
+      headingId="experience-heading"
+      title="My learning &"
+      highlight="development journey"
+      subtitle="Practical experience gained through projects and continuous self-learning."
+    />
+
+    <ol class="timeline" role="list">
+      @for (item of experience; track item.id; let i = $index) {
+        <li class="timeline__item" appReveal [revealDelay]="i * 100">
+          <div class="timeline__marker" aria-hidden="true">
+            <ng-icon [name]="item.icon" size="18" />
+          </div>
+
+          <article class="timeline__card glass">
+            <div class="timeline__top">
+              <div>
+                <h3 class="timeline__role">{{ item.role }}</h3>
+                @if (item.company) {
+                  <p class="timeline__company">{{ item.company }}</p>
+                }
+              </div>
+              <span class="timeline__period">
+                <ng-icon name="circleCheck" size="13" aria-hidden="true" />
+                {{ item.period }}
+              </span>
+            </div>
+
+            <p class="timeline__desc">{{ item.description }}</p>
+
+            <ul class="timeline__highlights" role="list">
+              @for (highlight of item.highlights; track highlight) {
+                <li class="timeline__highlight">
+                  <ng-icon name="arrowRight" size="14" aria-hidden="true" />
+                  <span>{{ highlight }}</span>
+                </li>
+              }
+            </ul>
+          </article>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<section id="projects" class="section projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="Projects"
+      headingId="projects-heading"
+      title="Selected work &"
+      highlight="experiments"
+      subtitle="A mix of full-stack applications, responsive websites and creative builds."
+      [center]="true"
+    />
+
+    <!-- Filter tabs -->
+    <div class="projects__filters" role="tablist" aria-label="Filter projects by category">
+      @for (filter of filters; track filter.id) {
+        <button
+          type="button"
+          class="projects__filter"
+          role="tab"
+          [class.projects__filter--active]="activeFilter() === filter.id"
+          [attr.aria-selected]="activeFilter() === filter.id"
+          (click)="setFilter(filter.id)"
+        >
+          <ng-icon [name]="filter.icon" size="15" aria-hidden="true" />
+          {{ filter.label }}
+          <span class="projects__filter-count">{{ filterCounts()[filter.id] }}</span>
+        </button>
+      }
+    </div>
+
+    <!-- Project grid -->
+    <div class="projects__grid">
+      @for (project of filteredProjects(); track project.id) {
+        <div appReveal>
+          <app-project-card [project]="project" />
+        </div>
+      } @empty {
+        <p class="projects__empty glass">No projects found in this category yet.</p>
+      }
+    </div>
+  </div>
+</section>

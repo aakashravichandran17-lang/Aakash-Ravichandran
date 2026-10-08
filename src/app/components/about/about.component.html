@@ -1,0 +1,59 @@
+<section id="about" class="section about" aria-labelledby="about-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="About Me"
+      headingId="about-heading"
+      title="Building with purpose and"
+      highlight="continuous learning"
+      subtitle="A developer focused on creating clean, functional and modern web experiences."
+    />
+
+    <div class="about__grid">
+      <div class="about__main glass" appReveal>
+        @for (paragraph of profile.bio; track $index) {
+          <p class="about__paragraph">{{ paragraph }}</p>
+        }
+
+        <ul class="about__highlights" role="list">
+          @for (item of highlights; track item.label) {
+            <li class="about__highlight">
+              <span class="about__highlight-icon" aria-hidden="true">
+                <ng-icon [name]="item.icon" size="16" />
+              </span>
+              {{ item.label }}
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="about__aside">
+        <div class="about__stats" role="list">
+          @for (stat of stats; track stat.id; let i = $index) {
+            <article
+              class="about__stat glass"
+              role="listitem"
+              appReveal
+              [revealDelay]="i * 90"
+            >
+              <span class="about__stat-icon" aria-hidden="true">
+                <ng-icon [name]="stat.icon" size="20" />
+              </span>
+              <span class="about__stat-value">{{ stat.value }}</span>
+              <span class="about__stat-label">{{ stat.label }}</span>
+            </article>
+          }
+        </div>
+
+        <aside class="about__card glass" appReveal [revealDelay]="160">
+          <span class="about__card-icon" aria-hidden="true">
+            <ng-icon name="mapPin" size="18" />
+          </span>
+          <div>
+            <p class="about__card-label">Based in</p>
+            <p class="about__card-value">{{ profile.location }}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

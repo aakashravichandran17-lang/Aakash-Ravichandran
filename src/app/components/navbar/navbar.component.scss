@@ -1,0 +1,214 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar--scrolled {
+  background: rgba(6, 8, 14, 0.72);
+  border-bottom-color: var(--border);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.9);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--navbar-h);
+}
+
+/* --- Logo --- */
+.navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+
+.navbar__logo-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  box-shadow: 0 8px 20px -8px rgba(99, 102, 241, 0.8);
+}
+
+.navbar__logo-text {
+  background: linear-gradient(100deg, #fff, #c7ccff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- Desktop links --- */
+.navbar__links {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.navbar__link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 999px;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient-brand);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.navbar__link--active {
+  color: #fff;
+}
+
+.navbar__link--active::after {
+  width: 60%;
+}
+
+/* --- Actions --- */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navbar__cta {
+  display: none;
+}
+
+.navbar__toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.navbar__toggle:hover {
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+}
+
+/* --- Mobile menu --- */
+.navbar__mobile {
+  position: fixed;
+  top: var(--navbar-h);
+  right: clamp(1rem, 4vw, 2rem);
+  left: clamp(1rem, 4vw, 2rem);
+  z-index: 1001;
+  padding: 0.75rem;
+  background: rgba(10, 13, 22, 0.96);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  transform: translateY(-12px) scale(0.98);
+  transform-origin: top center;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.navbar__mobile--open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.navbar__mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.navbar__mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar__mobile-link ng-icon {
+  color: var(--primary-bright);
+  opacity: 0.7;
+}
+
+.navbar__mobile-link:hover,
+.navbar__mobile-link--active {
+  background: var(--surface-strong);
+  color: var(--text);
+}
+
+.navbar__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  border: 0;
+  background: rgba(2, 3, 7, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* --- Breakpoints --- */
+@media (min-width: 768px) {
+  .navbar__links {
+    display: flex;
+  }
+  .navbar__cta {
+    display: inline-flex;
+  }
+  .navbar__toggle {
+    display: none;
+  }
+  .navbar__mobile {
+    display: none;
+  }
+  .navbar__backdrop {
+    display: none;
+  }
+}

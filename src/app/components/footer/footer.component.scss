@@ -1,0 +1,130 @@
+.footer {
+  position: relative;
+  margin-top: auto;
+  padding-top: clamp(3rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.05));
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  padding-bottom: 2.5rem;
+}
+
+/* --- Brand --- */
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.footer__logo-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.footer__tagline {
+  max-width: 24rem;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.footer__social {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.footer__social:hover {
+  color: #fff;
+  background: var(--surface-strong);
+  border-color: var(--primary-bright);
+  transform: translateY(-3px);
+}
+
+/* --- Columns --- */
+.footer__heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer__links a,
+.footer__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  transition: color 0.22s ease, transform 0.22s ease;
+  word-break: break-word;
+}
+
+.footer__links a:hover {
+  color: var(--primary-bright);
+  transform: translateX(3px);
+}
+
+/* --- Bottom bar --- */
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.footer__built {
+  color: var(--text-dim);
+}
+
+/* --- Breakpoints --- */
+@media (min-width: 720px) {
+  .footer__inner {
+    grid-template-columns: 1.6fr 1fr 1.2fr;
+  }
+  .footer__bottom {
+    flex-direction: row;
+    text-align: left;
+  }
+}

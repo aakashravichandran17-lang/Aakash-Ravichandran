@@ -1,0 +1,381 @@
+/* ==========================================================================
+   Global styles & design tokens
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces --- */
+  --bg: #05060a;
+  --bg-elevated: #0b0e17;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-strong: rgba(255, 255, 255, 0.055);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* --- Brand --- */
+  --primary: #6366f1;
+  --primary-bright: #818cf8;
+  --accent: #22d3ee;
+  --violet: #a855f7;
+
+  /* --- Text --- */
+  --text: #f5f7ff;
+  --text-muted: #9aa3b8;
+  --text-dim: #6b7280;
+
+  /* --- Effects --- */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 22px;
+  --shadow-soft: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 18px 45px -20px rgba(99, 102, 241, 0.55);
+  --gradient-brand: linear-gradient(135deg, var(--primary) 0%, var(--violet) 55%, var(--accent) 100%);
+  --gradient-text: linear-gradient(120deg, #ffffff 10%, #b7bffb 45%, #7dd3fc 90%);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --section-pad: clamp(4.5rem, 9vw, 7.5rem);
+  --container: 1200px;
+  --navbar-h: 72px;
+
+  color-scheme: dark;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ambient background glows */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 40rem at 12% -8%, rgba(99, 102, 241, 0.16), transparent 60%),
+    radial-gradient(50rem 35rem at 100% 5%, rgba(168, 85, 247, 0.12), transparent 55%),
+    radial-gradient(45rem 40rem at 50% 110%, rgba(34, 211, 238, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle grid texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- Focus visibility (accessibility) --- */
+:focus-visible {
+  outline: 2px solid var(--primary-bright);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 99px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 4vw, 2.5rem);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+.section__head {
+  max-width: 640px;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section__head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary-bright);
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--surface);
+  margin-bottom: 1.15rem;
+}
+
+.section__title {
+  font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+}
+
+.section__subtitle {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+}
+
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ==========================================================================
+   Reusable components
+   ========================================================================== */
+
+/* Glass card */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: 0 12px 30px -12px rgba(99, 102, 241, 0.75);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 18px 40px -12px rgba(99, 102, 241, 0.9);
+}
+
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  background: var(--surface-strong);
+  border-color: var(--primary-bright);
+  color: #fff;
+}
+
+.btn--sm {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Chips / tags */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.7rem 1.1rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 10px;
+  transform: translateY(-160%);
+  transition: transform 0.25s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Scroll reveal
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Motion preferences
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

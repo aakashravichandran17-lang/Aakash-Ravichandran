@@ -1,0 +1,167 @@
+<section id="contact" class="section contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="Contact"
+      headingId="contact-heading"
+      title="Let's work"
+      highlight="together"
+      subtitle="Have a project or an idea? Send me a message and I'll get back to you."
+      [center]="true"
+    />
+
+    <div class="contact__grid">
+      <!-- Contact details -->
+      <aside class="contact__info" appReveal>
+        <div class="contact__detail glass">
+          <span class="contact__detail-icon" aria-hidden="true">
+            <ng-icon name="mail" size="18" />
+          </span>
+          <div>
+            <p class="contact__detail-label">Email</p>
+            <a class="contact__detail-value" [href]="'mailto:' + email">{{ email }}</a>
+          </div>
+        </div>
+
+        <div class="contact__detail glass">
+          <span class="contact__detail-icon" aria-hidden="true">
+            <ng-icon name="mapPin" size="18" />
+          </span>
+          <div>
+            <p class="contact__detail-label">Location</p>
+            <p class="contact__detail-value">{{ profile.location }}</p>
+          </div>
+        </div>
+
+        <div class="contact__socials glass">
+          <p class="contact__socials-title">Find me online</p>
+          <ul class="contact__social-list" role="list">
+            @for (social of socials; track social.id) {
+              <li>
+                <a
+                  class="contact__social"
+                  [href]="social.url"
+                  [attr.target]="social.id === 'email' ? null : '_blank'"
+                  [attr.rel]="social.id === 'email' ? null : 'noopener noreferrer'"
+                >
+                  <ng-icon [name]="social.icon" size="18" aria-hidden="true" />
+                  <span>{{ social.label }}</span>
+                  <ng-icon name="arrowRight" size="15" aria-hidden="true" class="contact__social-arrow" />
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Form -->
+      <div class="contact__form-wrap glass" appReveal [revealDelay]="120">
+        @if (success()) {
+          <div class="contact__success" role="status" aria-live="polite">
+            <span class="contact__success-icon" aria-hidden="true">
+              <ng-icon name="circleCheck" size="30" />
+            </span>
+            <h3 class="contact__success-title">Message sent successfully!</h3>
+            <p class="contact__success-text">
+              Thanks for reaching out. I'll get back to you as soon as possible.
+            </p>
+            <button type="button" class="btn btn--ghost btn--sm" (click)="dismissSuccess()">
+              Send another message
+            </button>
+          </div>
+        } @else {
+          <form class="contact__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <div class="contact__row">
+              <div class="field">
+                <label class="field__label" for="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="field__input"
+                  formControlName="name"
+                  autocomplete="name"
+                  placeholder="Your name"
+                  [attr.aria-invalid]="showError('name')"
+                  [attr.aria-describedby]="showError('name') ? 'name-error' : null"
+                />
+                @if (showError('name')) {
+                  <p class="field__error" id="name-error">
+                    <ng-icon name="circleAlert" size="13" aria-hidden="true" />
+                    Please enter your name (at least 2 characters).
+                  </p>
+                }
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="field__input"
+                  formControlName="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  [attr.aria-invalid]="showError('email')"
+                  [attr.aria-describedby]="showError('email') ? 'email-error' : null"
+                />
+                @if (showError('email')) {
+                  <p class="field__error" id="email-error">
+                    <ng-icon name="circleAlert" size="13" aria-hidden="true" />
+                    Please enter a valid email address.
+                  </p>
+                }
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="subject">Subject</label>
+              <input
+                id="subject"
+                type="text"
+                class="field__input"
+                formControlName="subject"
+                placeholder="What is this about?"
+                [attr.aria-invalid]="showError('subject')"
+                [attr.aria-describedby]="showError('subject') ? 'subject-error' : null"
+              />
+              @if (showError('subject')) {
+                <p class="field__error" id="subject-error">
+                  <ng-icon name="circleAlert" size="13" aria-hidden="true" />
+                  Please enter a subject (at least 3 characters).
+                </p>
+              }
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="message">Message</label>
+              <textarea
+                id="message"
+                class="field__input field__input--textarea"
+                formControlName="message"
+                rows="5"
+                placeholder="Tell me about your project..."
+                [attr.aria-invalid]="showError('message')"
+                [attr.aria-describedby]="showError('message') ? 'message-error' : null"
+              ></textarea>
+              @if (showError('message')) {
+                <p class="field__error" id="message-error">
+                  <ng-icon name="circleAlert" size="13" aria-hidden="true" />
+                  Please enter a message (at least 10 characters).
+                </p>
+              }
+            </div>
+
+            <button type="submit" class="btn btn--primary contact__submit" [disabled]="sending()">
+              @if (sending()) {
+                <ng-icon name="refreshCw" size="17" aria-hidden="true" class="contact__spinner" />
+                Sending...
+              } @else {
+                <ng-icon name="send" size="17" aria-hidden="true" />
+                Send Message
+              }
+            </button>
+          </form>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<section id="skills" class="section skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="Skills"
+      headingId="skills-heading"
+      title="Technologies I"
+      highlight="work with"
+      subtitle="A growing toolkit across frontend, backend, databases and creative tools."
+      [center]="true"
+    />
+
+    <div class="skills__grid">
+      @for (category of categories; track category.id; let i = $index) {
+        <div appReveal [revealDelay]="(i % 3) * 80">
+          <app-skill-card [category]="category" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

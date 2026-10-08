@@ -1,0 +1,103 @@
+<section id="home" class="hero section" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <!-- Text -->
+    <div class="hero__content">
+      @if (profile.availability) {
+        <span class="hero__badge" appReveal>
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          {{ profile.availability }}
+        </span>
+      }
+
+      <h1 id="hero-title" class="hero__title" appReveal [revealDelay]="60">
+        Hi, I'm <span class="gradient-text">{{ profile.shortName }}</span>
+      </h1>
+
+      <p class="hero__role" appReveal [revealDelay]="120">
+        <span class="hero__role-line" aria-hidden="true"></span>
+        {{ profile.role }}
+      </p>
+
+      <p class="hero__text" appReveal [revealDelay]="180">
+        I build modern, responsive and user-friendly web applications using modern frontend and
+        backend technologies.
+      </p>
+
+      <div class="hero__actions" appReveal [revealDelay]="240">
+        <a href="#projects" class="btn btn--primary" (click)="navigate($event, 'projects')">
+          View My Work
+          <ng-icon name="arrowRight" size="17" aria-hidden="true" />
+        </a>
+        <a href="#contact" class="btn btn--ghost" (click)="navigate($event, 'contact')">
+          Contact Me
+          <ng-icon name="mail" size="17" aria-hidden="true" />
+        </a>
+      </div>
+
+      <ul class="hero__socials" appReveal [revealDelay]="300" role="list">
+        @for (social of socials; track social.id) {
+          <li>
+            <a
+              class="hero__social"
+              [href]="social.url"
+              [attr.target]="social.id === 'email' ? null : '_blank'"
+              [attr.rel]="social.id === 'email' ? null : 'noopener noreferrer'"
+              [attr.aria-label]="social.label"
+            >
+              <ng-icon [name]="social.icon" size="18" aria-hidden="true" />
+              <span>{{ social.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Developer terminal / code window -->
+    <div class="hero__visual" appReveal [revealDelay]="200" aria-hidden="true">
+      <div class="code-window">
+        <div class="code-window__bar">
+          <span class="code-window__dot code-window__dot--red"></span>
+          <span class="code-window__dot code-window__dot--yellow"></span>
+          <span class="code-window__dot code-window__dot--green"></span>
+          <span class="code-window__file">developer.ts</span>
+        </div>
+        <pre class="code-window__body"><code><span class="c-key">const</span> <span class="c-var">developer</span> = &#123;
+  <span class="c-prop">name</span>: <span class="c-str">'{{ profile.name }}'</span>,
+  <span class="c-prop">role</span>: <span class="c-str">'{{ profile.role }}'</span>,
+  <span class="c-prop">stack</span>: [<span class="c-str">'Angular'</span>, <span class="c-str">'Node.js'</span>],
+  <span class="c-prop">focus</span>: <span class="c-str">'Modern web apps'</span>,
+  <span class="c-prop">learning</span>: <span class="c-bool">true</span>,
+&#125;;</code></pre>
+      </div>
+
+      <!-- Floating tech badges -->
+      <div class="tech-float tech-float--1">
+        <ng-icon name="brandAngular" size="20" />
+        <span>Angular</span>
+      </div>
+      <div class="tech-float tech-float--2">
+        <ng-icon name="brandTypescript" size="20" />
+        <span>TypeScript</span>
+      </div>
+      <div class="tech-float tech-float--3">
+        <ng-icon name="brandNode" size="20" />
+        <span>Node.js</span>
+      </div>
+      <div class="tech-float tech-float--4">
+        <ng-icon name="brandMongodb" size="20" />
+        <span>MongoDB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <a
+    class="hero__scroll"
+    href="#about"
+    (click)="navigate($event, 'about')"
+    aria-label="Scroll to About section"
+  >
+    <span class="hero__scroll-text">Scroll</span>
+    <span class="hero__scroll-mouse"><span></span></span>
+  </a>
+</section>

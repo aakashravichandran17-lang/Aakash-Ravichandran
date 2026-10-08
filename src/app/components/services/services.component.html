@@ -1,0 +1,35 @@
+<section id="services" class="section services" aria-labelledby="services-heading">
+  <div class="container">
+    <app-section-header
+      eyebrow="Services"
+      headingId="services-heading"
+      title="What I can"
+      highlight="help you build"
+      subtitle="Freelance and business-focused web development services for modern needs."
+      [center]="true"
+    />
+
+    <div class="services__grid">
+      @for (service of services; track service.id; let i = $index) {
+        <article class="service glass" appReveal [revealDelay]="(i % 4) * 70">
+          <span class="service__icon" aria-hidden="true">
+            <ng-icon [name]="service.icon" size="22" />
+          </span>
+          <h3 class="service__title">{{ service.title }}</h3>
+          <p class="service__desc">{{ service.description }}</p>
+        </article>
+      }
+    </div>
+
+    <div class="services__cta glass" appReveal>
+      <div class="services__cta-text">
+        <h3 class="services__cta-title">{{ cta }}</h3>
+        <p class="services__cta-sub">Tell me about your idea and let's bring it to life.</p>
+      </div>
+      <a href="#contact" class="btn btn--primary" (click)="scrollToContact($event)">
+        Start a Project
+        <ng-icon name="arrowRight" size="17" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</section>

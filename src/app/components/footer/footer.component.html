@@ -1,0 +1,63 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a class="footer__logo" href="#home" (click)="navigate($event, 'home')">
+        <span class="footer__logo-mark" aria-hidden="true">AR</span>
+        {{ profile.logo }}
+      </a>
+      <p class="footer__tagline">Building modern web experiences with code and creativity.</p>
+
+      <ul class="footer__socials" role="list">
+        @for (social of socials; track social.id) {
+          <li>
+            <a
+              class="footer__social"
+              [href]="social.url"
+              [attr.target]="social.id === 'email' ? null : '_blank'"
+              [attr.rel]="social.id === 'email' ? null : 'noopener noreferrer'"
+              [attr.aria-label]="social.label"
+            >
+              <ng-icon [name]="social.icon" size="18" aria-hidden="true" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <h2 class="footer__heading">Quick Links</h2>
+      <ul class="footer__links" role="list">
+        @for (link of quickLinks; track link.id) {
+          <li>
+            <a [href]="'#' + link.target" (click)="navigate($event, link.target)">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="footer__contact">
+      <h2 class="footer__heading">Get in Touch</h2>
+      <ul class="footer__links" role="list">
+        <li>
+          <a [href]="'mailto:' + email">
+            <ng-icon name="mail" size="15" aria-hidden="true" />
+            {{ email }}
+          </a>
+        </li>
+        <li>
+          <span class="footer__text">
+            <ng-icon name="mapPin" size="15" aria-hidden="true" />
+            {{ profile.location }}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>&copy; {{ year }} {{ profile.name }}. All rights reserved.</p>
+    <p class="footer__built">Built with Angular</p>
+  </div>
+</footer>
